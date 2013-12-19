@@ -4,7 +4,8 @@ set PROGRAMMER=dfu-programmer
 set TARGET=atmega32u4
 set HEX=hex\%1.hex
 if not exist %HEX% goto :END
-set "EEP="
+shift
+set "EEP=%~1"
 shift
 :LOOP
 if not "%~1" == "" (
@@ -19,4 +20,5 @@ if not "%~1" == "" (
 %PROGRAMMER% %TARGET% flash-eeprom "%EEP%"
 :END
 %PROGRAMMER% %TARGET% start
+@echo off
 pause
