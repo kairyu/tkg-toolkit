@@ -16,7 +16,9 @@ if not "%~1" == "" (
 @echo on
 %PROGRAMMER% %TARGET% erase
 %PROGRAMMER% %TARGET% flash %HEX%
-@if "%EEP%" == "" goto :END
+@echo off
+if "%EEP%" == "" goto :END
+@echo on
 %PROGRAMMER% %TARGET% flash-eeprom "%EEP%"
 :END
 %PROGRAMMER% %TARGET% start
