@@ -2,7 +2,7 @@
 cd %~dp0
 set PROGRAMMER=dfu-programmer
 set TARGET=atmega32u4
-set HEX=hex\%1.hex
+set "HEX=%~1"
 if not exist %HEX% goto :END
 shift
 set "EEP=%~1"
