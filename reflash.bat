@@ -1,6 +1,6 @@
 @echo off
 cd %~dp0
-set PROGRAMMER=dfu-programmer
+set PROGRAMMER=bin\dfu-programmer
 set TARGET=atmega32u4
 set "HEX=%~1"
 if not exist %HEX% goto :END
