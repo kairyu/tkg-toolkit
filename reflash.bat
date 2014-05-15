@@ -1,6 +1,6 @@
 @echo off
 cd %~dp0
-set PROGRAMMER=bin\dfu-programmer
+set EXEC=bin\dfu-programmer
 set TARGET=atmega32u4
 set "HEX=%~1"
 if not exist %HEX% goto :END
@@ -14,13 +14,13 @@ if not "%~1" == "" (
 	goto :LOOP
 )
 @echo on
-%PROGRAMMER% %TARGET% erase
-%PROGRAMMER% %TARGET% flash %HEX%
+%EXEC% %TARGET% erase
+%EXEC% %TARGET% flash %HEX%
 @echo off
 if "%EEP%" == "" goto :END
 @echo on
-%PROGRAMMER% %TARGET% flash-eeprom "%EEP%"
+%EXEC% %TARGET% flash-eeprom "%EEP%"
 :END
-%PROGRAMMER% %TARGET% start
+%EXEC% %TARGET% start
 @echo off
 pause
