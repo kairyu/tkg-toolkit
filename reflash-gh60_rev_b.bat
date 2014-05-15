@@ -1,3 +1,4 @@
 @echo off
 cd %~dp0
-reflash.bat hex\gh60_rev_b.hex %*
+set bat=%~n0
+reflash.bat hex\%bat:~8%.hex %*
