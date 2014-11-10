@@ -23,8 +23,17 @@ if not "%~1" == "" (
 if not "%ARG2%" == "" set /a ARGS=2
 
 if "!ARGS!" == "1" (
-	set HEX=%ARG1%
-	goto :REFLASH
+	if not exist %ARG1% goto :USAGE
+	for %%i in (%ARG1%) do set ARG1_EXT=%%~xi
+	if "!ARG1_EXT!" == ".hex" (
+		set HEX=%ARG1%
+		goto :REFLASH
+	)
+	if "!ARG1_EXT!" == ".eep" (
+		set EEP=%ARG1%
+		goto :REFLASH
+	)
+	goto :USAGE
 )
 if "!ARGS!" == "2" (
 	if not exist %ARG2% goto :USAGE
@@ -39,6 +48,7 @@ if "!ARGS!" == "2" (
 		set EEP=%ARG2%
 		goto :REFLASH
 	)
+	goto :USAGE
 )
 goto :USAGE
 
@@ -49,12 +59,14 @@ echo Waiting for Bootloader...
 if not "%ERRORLEVEL%"=="0" (
 	goto :WAIT
 )
-echo Erasing...
-%EXEC% %TARGET% erase
-echo Reflashing hex...
-%EXEC% %TARGET% flash %HEX%
+if not "%HEX%" == "" (
+	echo Erasing...
+	%EXEC% %TARGET% erase
+	echo Reflashing HEX file...
+	%EXEC% %TARGET% flash %HEX%
+)
 if not "%EEP%" == "" (
-	echo Reflashing eep...
+	echo Reflashing EEP file...
 	%EXEC% %TARGET% flash-eeprom "%EEP%"
 )
 if not "%ERRORLEVEL%" == "0" (
@@ -64,7 +76,7 @@ if "%ERRORLEVEL%" == "0" (
 	echo Success^^!
 	if not "%HEX_ORIG%" == "" (
 		set "INPUT="
-		set /p INPUT=Replace existing hex with the new one? [y/N]
+		set /p INPUT=Replace existing HEX with the new one? [y/N]
 		if "!INPUT!" == "y" (
 			copy /y %HEX% %HEX_ORIG%
 			if not "%ERRORLEVEL%" == "0" (
