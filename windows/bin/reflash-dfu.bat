@@ -97,4 +97,4 @@ goto :END
 
 :END
 endlocal
-:: pause
+pause
