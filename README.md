@@ -1,4 +1,4 @@
-dfu-reflash
-===========
+tkg-toolkit (formerly dfu-reflash)
+=============
 
-Batch file for reflashing keyboard firmware with dfu-programmer 
+A collection of tools used for supporting TKG (TMK Keymap Generator).
