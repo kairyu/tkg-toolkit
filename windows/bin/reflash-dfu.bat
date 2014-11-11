@@ -9,7 +9,7 @@ set "EEP="
 
 set "ARG1=%~1"
 if "%ARG1%" == "" goto :USAGE
-if not exist %ARG1% goto :USAGE
+if not exist "%ARG1%" goto :USAGE
 set /a ARGS=1
 shift
 
@@ -23,29 +23,29 @@ if not "%~1" == "" (
 if not "%ARG2%" == "" set /a ARGS=2
 
 if "!ARGS!" == "1" (
-	if not exist %ARG1% goto :USAGE
-	for %%i in (%ARG1%) do set ARG1_EXT=%%~xi
+	if not exist "%ARG1%" goto :USAGE
+	for %%i in ("%ARG1%") do set ARG1_EXT=%%~xi
 	if "!ARG1_EXT!" == ".hex" (
-		set HEX=%ARG1%
+		set "HEX=%ARG1%"
 		goto :REFLASH
 	)
 	if "!ARG1_EXT!" == ".eep" (
-		set EEP=%ARG1%
+		set "EEP=%ARG1%"
 		goto :REFLASH
 	)
 	goto :USAGE
 )
 if "!ARGS!" == "2" (
-	if not exist %ARG2% goto :USAGE
-	for %%i in (%ARG2%) do set ARG2_EXT=%%~xi
+	if not exist "%ARG2%" goto :USAGE
+	for %%i in ("%ARG2%") do set ARG2_EXT=%%~xi
 	if "!ARG2_EXT!" == ".hex" (
-		set HEX=%ARG2%
-		set HEX_ORIG=%ARG1%
+		set "HEX=%ARG2%"
+		set "HEX_ORIG=%ARG1%"
 		goto :REFLASH
 	)
 	if "!ARG2_EXT!" == ".eep" (
-		set HEX=%ARG1%
-		set EEP=%ARG2%
+		set "HEX=%ARG1%"
+		set "EEP=%ARG2%"
 		goto :REFLASH
 	)
 	goto :USAGE
