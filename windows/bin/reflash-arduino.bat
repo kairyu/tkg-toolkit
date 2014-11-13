@@ -58,7 +58,7 @@ for %%f in (*) do (
 	set "FILE=%%f"
 	set "TEST=!FILE:COM=!"
 	if not "!TEST!" == "!FILE!" (
-		set "COM=!FILE!"
+		set "COM=!FILE:_=!"
 		echo Waiting for !COM!...
 		goto :COM
 	)

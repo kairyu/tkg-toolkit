@@ -36,5 +36,5 @@ goto :LOOP
 
 :END
 echo !COM!
-copy /y NUL !COM! >NUL
+copy /y NUL _!COM! >NUL
 pause
