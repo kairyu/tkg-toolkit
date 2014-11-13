@@ -77,11 +77,11 @@ echo %COM% is ready
 set PORT=%COM%
 if "%EEP%" == "" (
 	echo Reflashing HEX file...
-	%EXEC% -p%PARTNO% -c%PROGRAMMER% -P%PORT% -Uflash:w:"%HEX%":i
+	"%EXEC%" -p%PARTNO% -c%PROGRAMMER% -P%PORT% -Uflash:w:"%HEX%":i
 )
 if not "%EEP%" == "" (
 	echo Reflashing EEP file...
-	%EXEC% -p%PARTNO% -c%PROGRAMMER% -P%PORT% -Ueeprom:w:"%EEP%":i
+	"%EXEC%"-p%PARTNO% -c%PROGRAMMER% -P%PORT% -Ueeprom:w:"%EEP%":i
 )
 if not "%ERRORLEVEL%" == "0" (
 	echo Fail^^!

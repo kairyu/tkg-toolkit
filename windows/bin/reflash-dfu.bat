@@ -55,19 +55,19 @@ goto :USAGE
 :REFLASH
 echo Waiting for Bootloader...
 :WAIT
-%EXEC% %TARGET% get >nul 2>nul
+"%EXEC%" %TARGET% get >nul 2>nul
 if not "%ERRORLEVEL%"=="0" (
 	goto :WAIT
 )
 if not "%HEX%" == "" (
 	echo Erasing...
-	%EXEC% %TARGET% erase
+	"%EXEC%" %TARGET% erase
 	echo Reflashing HEX file...
-	%EXEC% %TARGET% flash %HEX%
+	"%EXEC%" %TARGET% flash %HEX%
 )
 if not "%EEP%" == "" (
 	echo Reflashing EEP file...
-	%EXEC% %TARGET% flash-eeprom "%EEP%"
+	"%EXEC%" %TARGET% flash-eeprom "%EEP%"
 )
 if not "%ERRORLEVEL%" == "0" (
 	echo Fail^^!
@@ -88,7 +88,7 @@ if "%ERRORLEVEL%" == "0" (
 		)
 	)
 )
-%EXEC% %TARGET% reset
+"%EXEC%" %TARGET% reset
 goto :END
 
 :USAGE
