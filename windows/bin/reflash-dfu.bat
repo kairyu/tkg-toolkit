@@ -22,7 +22,7 @@ if not "%~1" == "" (
 )
 if not "%ARG2%" == "" set /a ARGS=2
 
-if "!ARGS!" == "1" (
+if "%ARGS%" == "1" (
 	if not exist "%ARG1%" goto :USAGE
 	for %%i in ("%ARG1%") do set ARG1_EXT=%%~xi
 	if "!ARG1_EXT!" == ".hex" (
@@ -35,7 +35,7 @@ if "!ARGS!" == "1" (
 	)
 	goto :USAGE
 )
-if "!ARGS!" == "2" (
+if "%ARGS%" == "2" (
 	if not exist "%ARG2%" goto :USAGE
 	for %%i in ("%ARG2%") do set ARG2_EXT=%%~xi
 	if "!ARG2_EXT!" == ".hex" (
@@ -71,9 +71,11 @@ if not "%EEP%" == "" (
 )
 if not "%ERRORLEVEL%" == "0" (
 	echo Fail^^!
+	set EXITCODE=%ERRORLEVEL%
 )
 if "%ERRORLEVEL%" == "0" (
 	echo Success^^!
+	set EXITCODE=%ERRORLEVEL%
 	if not "%HEX_ORIG%" == "" (
 		set "INPUT="
 		set /p INPUT=Replace existing HEX with the new one? [y/N]
@@ -97,4 +99,4 @@ goto :END
 
 :END
 endlocal
-pause
+exit /b %EXITCODE%
