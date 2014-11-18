@@ -80,16 +80,16 @@ if "%ARG%" == "" (
 if exist "%ARG%" (
 	if "%ARGEXT%" == ".hex" (
 		set MANIP=2
-		echo  Reflash firmware: %ARG%
+		echo  Reflash firmware: "%ARG%"
 		goto :CONFIRM
 	)
 	if "%ARGEXT%" == ".eep" (
 		set MANIP=3
-		echo  Reflash eeprom: %ARG%
+		echo  Reflash eeprom: "%ARG%"
 		goto :CONFIRM
 	)
 )
-echo  Wrong argument: %ARG%
+echo  Wrong argument: "%ARG%"
 echo.
 goto :END
 
@@ -103,15 +103,15 @@ if "!INPUT!" == "n" ( goto :EOF )
 set "ARG1="
 set "ARG2="
 if "%MANIP%" == "1" (
-	set ARG1=%FWPATH%\%KBDFW%
+	set "ARG1=%FWPATH%\%KBDFW%"
 ) else if "%MANIP%" == "2" (
-	set ARG1=%ARG%
+	set "ARG1=%ARG%"
 ) else if "%MANIP%" == "3" (
 	if "%KBDBL%" == "atmel_dfu" (
-		set ARG1=%FWPATH%\%KBDFW%
-		set ARG2=%ARG%
+		set "ARG1=%FWPATH%\%KBDFW%"
+		set "ARG2=%ARG%"
 	) else (
-		set ARG1=%ARG%
+		set "ARG1=%ARG%"
 	)
 ) else (
 	goto :EOF
