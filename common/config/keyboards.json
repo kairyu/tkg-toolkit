@@ -1,0 +1,63 @@
+[
+	{
+		"name": "GH60 RevA/B/C",
+		"mcu": "atmega32u4",
+		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
+		"firmware": "gh60_rev_a_b_c.hex"
+	},
+	{
+		"name": "GH60 RevCHN",
+		"mcu": "atmega32u4",
+		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
+		"firmware": "gh60_rev_chn.hex"
+	},
+	{
+		"name": "GHPad",
+		"mcu": "atmega32u4",
+		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
+		"firmware": "ghpad.hex"
+	},
+	{
+		"name": "SMART68",
+		"mcu": "atmega32u4",
+		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
+		"firmware": "smart68.hex"
+	},
+	{
+		"name": "RedScarfII",
+		"mcu": "atmega32u4",
+		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
+		"firmware": "RedScarfII.hex"
+	},
+	{
+		"name": "LR94",
+		"mcu": "atmega32u4",
+		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
+		"firmware": "lr94.hex"
+	},
+	{
+		"name": "AKB96",
+		"mcu": "atmega32u4",
+		"bootloader": [ "lufa_dfu", "arduino" ],
+		"firmware": "akb96.hex"
+	},
+	{
+		"name": "TentaPad",
+		"mcu": "atmega32u2",
+		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
+		"firmware": "ghpad.hex"
+	},
+	{
+		"name": "Kimera",
+		"mcu": "atmega32u4",
+		"bootloader": [ "arduino" , "lufa_dfu" ],
+		"firmware": "kimera.hex"
+	},
+	{
+		"name": "Two-Headed Kimera",
+		"mcu": "atmega32u4",
+		"bootloader": [ "arduino" , "lufa_dfu" ],
+		"firmware": "kimera_th.hex"
+	}
+]
+
