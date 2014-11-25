@@ -1,9 +1,9 @@
 [
 	{
-		"name": "GH60 RevA/B",
+		"name": "GH60 RevA/B/C",
 		"mcu": "atmega32u4",
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
-		"firmware": "gh60_rev_b.hex"
+		"firmware": "gh60_rev_a_b_c.hex"
 	},
 	{
 		"name": "GH60 RevCHN",
