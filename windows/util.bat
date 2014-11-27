@@ -13,6 +13,7 @@ set BINPATH=%CURPATH%\bin
 set CONFPATH=%CURPATH%\conf
 set SCRIPTPATH=%CURPATH%\script
 set FWPATH=%CURPATH%\..\common\firmware
+set MISCPATH=%CURPATH%\..\common\misc
 
 :WELCOME
 cls
@@ -74,9 +75,13 @@ if !INPUT! gtr 2 ( goto :ENTERUTILITYNUMBER )
 set /a UTLNUMBER="!INPUT! + 0"
 
 :SWITCHUTILITY
-if "%UTLNUMBER%" == "1" ( goto :DUMPEEPROM )
-else if "%UTLNUMBER%" == "2" ( goto :ERASEEEPROM )
-else ( goto :EOF )
+if "%UTLNUMBER%" == "1" (
+	goto :DUMPEEPROM
+) else if "%UTLNUMBER%" == "2" (
+	goto :ERASEEEPROM
+) else (
+	goto :EOF
+)
 
 :DUMPEEPROM
 echo.
@@ -94,31 +99,29 @@ if "%KBDBL%" == "atmel_dfu" (
 	call "%SCRIPTPATH%\dump_eeprom-arduino" "%CURPATH%\eeprom.bin"
 ) else (
 	echo Unsupported bootloader
-	echo.
-	goto :END
 )
 echo.
+goto :END
 
 :ERASEEEPROM
 echo.
 if "%KBDBL%" == "atmel_dfu" (
 	set TARGET=%KBDMCU%
 	set "HEX=%FWPATH%\%KBDFW%"
-	call "%SCRIPTPATH%\dump_eeprom-dfu" "%CURPATH%\eeprom.bin"
+	call "%SCRIPTPATH%\reflash-dfu" "%MISCPATH%\empty.eep"
 ) else if "%KBDBL%" == "lufa_dfu" (
 	set TARGET=%KBDMCU%
 	set "HEX="
-	call "%SCRIPTPATH%\dump_eeprom-dfu" "%CURPATH%\eeprom.bin"
+	call "%SCRIPTPATH%\reflash-dfu" "%MISCPATH%\empty.eep"
 ) else if "%KBDBL%" == "arduino" (
 	set PARTNO=%KBDMCU%
 	set COM=%KBDCOM%
-	call "%SCRIPTPATH%\dump_eeprom-arduino" "%CURPATH%\eeprom.bin"
+	call "%SCRIPTPATH%\reflash-arduino" "%MISCPATH%\empty.eep"
 ) else (
 	echo Unsupported bootloader
-	echo.
-	goto :END
 )
 echo.
+goto :END
 
 :END
 pause
