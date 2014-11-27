@@ -11,6 +11,7 @@ setlocal enableextensions enabledelayedexpansion
 set CURPATH=%~dp0
 set BINPATH=%CURPATH%\bin
 set CONFPATH=%CURPATH%\conf
+set SCRIPTPATH=%CURPATH%\script
 set KBDFILE=%CURPATH%\..\common\config\keyboards.json
 set KBD=type "%KBDFILE%"
 set JQ="%BINPATH%\jq"
@@ -108,44 +109,15 @@ goto :SAVECONFIG
 :FINDSERIALPORT
 echo.
 echo | set /p="Please reset your arduino ... "
-set FIRST=1
-set "KBDCOM="
-set "PREVLIST="
-:FINDSERIALPORTLOOP
-set "PORTLIST="
-for /f "DELIMS=" %%a in ('mode') do (
-	set OUTPUT=%%a
-	set "TEST=!OUTPUT:COM=!"
-	if not "!TEST!"=="!OUTPUT!" (
-		set PORT=!OUTPUT:*COM=!
-		set PORT=!PORT::=!
-		set "PORTLIST=!PORTLIST! !PORT!"
-	)
-)
-if not "%FIRST%" == "1" (
-	for %%a in (!PORTLIST!) do (
-		if not "%%a" == "" (
-			set FOUND=0
-			for %%b in (!PREVLIST!) do (
-				if "!FOUND!" == "0" if %%a == %%b set FOUND=1
-			)
-			if "!FOUND!" == "0" (
-				set KBDCOM=COM%%a
-				goto :FOUNDSERIALPORT
-			)
-		)
-	)
-)
-set FIRST=0
-set PREVLIST=!PORTLIST!
-goto :FINDSERIALPORTLOOP
-:FOUNDSERIALPORT
+call "%SCRIPTPATH%\find_serial_port"
+set KBDCOM=COM%ERRORLEVEL%
+if "%KBDCOM%" == "COM0" ( goto :END )
 echo found %KBDCOM%
 goto :SAVECONFIG
 
 :SAVECONFIG
 set CONFFILE=%CONFPATH%\default.ini
-mkdir %CONFPATH% 2>NUL
+mkdir "%CONFPATH%" 2>NUL
 echo Name=%KBDNAME%> "%CONFFILE%"
 echo MCU=%KBDMCU%>> "%CONFFILE%"
 echo Bootloader=%KBDBL%>> "%CONFFILE%"

@@ -1,7 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
 set SCRIPT=%~nx0
-set EXEC=%~dp0\avrdude
+set CURPATH=%~dp0
+set BINPATH=%CURPATH%\..\bin
+set SCRIPTPATH=%CURPATH%\..\script
+set EXEC=%BINPATH%\avrdude
 if "%PARTNO%" == "" set PARTNO=atmega32u4
 set PROGRAMMER=avr109
 set "HEX="
@@ -54,29 +57,8 @@ if "%ARGS%" == "2" (
 goto :USAGE
 
 :REFLASH
-if "%COM%"=="" (
-	for %%f in (*) do (
-		set "FILE=%%f"
-		set "TEST=!FILE:COM=!"
-		if not "!TEST!" == "!FILE!" (
-			set "COM=!FILE:_=!"
-			goto :COM
-		)
-	)
-	echo COM not specified
-	goto :END
-)
-
-:COM
-echo Waiting for %COM% ...
-:WAIT_COM
-for /f "DELIMS=" %%a in ('mode %COM%') do set OUT=%%a
-set "TEST=%OUT::=%"
-if not "%TEST%" == "%OUT%" goto :FLASH
-goto :WAIT_COM
-
-:FLASH
-echo %COM% is ready
+call "%SCRIPTPATH%\wait_serial_port" %COM%
+if not "%ERRORLEVEL%" == "0" ( goto :END )
 set PORT=%COM%
 if "%EEP%" == "" (
 	echo Reflashing HEX file...
@@ -114,5 +96,4 @@ goto :END
 goto :END
 
 :END
-endlocal
 exit /b %EXITCODE%

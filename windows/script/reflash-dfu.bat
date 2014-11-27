@@ -1,7 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
 set SCRIPT=%~nx0
-set EXEC=%~dp0\dfu-programmer
+set CURPATH=%~dp0
+set BINPATH=%CURPATH%\..\bin
+set SCRIPTPATH=%CURPATH%\..\script
+set EXEC=%BINPATH%\dfu-programmer
 if "%TARGET%" == "" set TARGET=atmega32u4
 set "HEX="
 set "HEX_ORIG="
@@ -98,5 +101,4 @@ goto :END
 goto :END
 
 :END
-endlocal
 exit /b %EXITCODE%

@@ -11,6 +11,7 @@ setlocal enableextensions enabledelayedexpansion
 set CURPATH=%~dp0
 set BINPATH=%CURPATH%\bin
 set CONFPATH=%CURPATH%\conf
+set SCRIPTPATH=%CURPATH%\script
 set FWPATH=%CURPATH%\..\common\firmware
 
 :WELCOME
@@ -28,7 +29,7 @@ if not exist "%CONFFILE%" (
 )
 
 :LOADCONFIGFILE
-for /f "delims=" %%a in (%CONFFILE%) do (
+for /f "delims=" %%a in ('type "%CONFFILE%"') do (
 	for /f "delims== tokens=1-2" %%b in ("%%a") do (
 		set KEY=%%b
 		set VALUE=%%c
@@ -122,17 +123,17 @@ echo.
 if "%KBDBL%" == "atmel_dfu" (
 	set TARGET=%KBDMCU%
 	if "%ARG2%" == "" (
-		call %BINPATH%\reflash-dfu "%ARG1%"
+		call "%SCRIPTPATH%\reflash-dfu" "%ARG1%"
 	) else (
-		call %BINPATH%\reflash-dfu "%ARG1%" "%ARG2%"
+		call "%SCRIPTPATH%\reflash-dfu" "%ARG1%" "%ARG2%"
 	)
 ) else if "%KBDBL%" == "lufa_dfu" (
 	set TARGET=%KBDMCU%
-	call %BINPATH%\reflash-dfu "%ARG1%"
+	call "%SCRIPTPATH%\reflash-dfu" "%ARG1%"
 ) else if "%KBDBL%" == "arduino" (
 	set PARTNO=%KBDMCU%
 	set COM=%KBDCOM%
-	call %BINPATH%\reflash-arduino "%ARG1%"
+	call "%SCRIPTPATH%\reflash-arduino" "%ARG1%"
 ) else (
 	echo Unsupported bootloader
 	echo.
