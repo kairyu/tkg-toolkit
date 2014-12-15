@@ -107,11 +107,9 @@ goto :END
 echo.
 if "%KBDBL%" == "atmel_dfu" (
 	set TARGET=%KBDMCU%
-	set "HEX=%FWPATH%\%KBDFW%"
-	call "%SCRIPTPATH%\reflash-dfu" "%MISCPATH%\empty.eep"
+	call "%SCRIPTPATH%\reflash-dfu" "%FWPATH%\%KBDFW%" "%MISCPATH%\empty.eep"
 ) else if "%KBDBL%" == "lufa_dfu" (
 	set TARGET=%KBDMCU%
-	set "HEX="
 	call "%SCRIPTPATH%\reflash-dfu" "%MISCPATH%\empty.eep"
 ) else if "%KBDBL%" == "arduino" (
 	set PARTNO=%KBDMCU%
