@@ -30,6 +30,12 @@
 		"firmware": "RedScarfII.hex"
 	},
 	{
+		"name": "RedScarfIII",
+		"mcu": "atmega32u4",
+		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
+		"firmware": "RedScarfIII.hex"
+	},
+	{
 		"name": "LR94",
 		"mcu": "atmega32u4",
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
