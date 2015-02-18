@@ -18,6 +18,12 @@
 		"firmware": "ghpad.hex"
 	},
 	{
+		"name": "Fantastic60",
+		"mcu": "atmega32u4",
+		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
+		"firmware": "fantastic60.hex"
+	},
+	{
 		"name": "SMART68",
 		"mcu": "atmega32u4",
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
@@ -28,12 +34,6 @@
 		"mcu": "atmega32u4",
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
 		"firmware": "RedScarfII.hex"
-	},
-	{
-		"name": "RedScarfIII",
-		"mcu": "atmega32u4",
-		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
-		"firmware": "RedScarfIII.hex"
 	},
 	{
 		"name": "LR94",
