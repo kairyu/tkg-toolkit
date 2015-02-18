@@ -1,0 +1,3 @@
+[submodule "common/firmware"]
+	path = common/firmware
+	url = https://github.com/kairyu/tkg-firmware.git
