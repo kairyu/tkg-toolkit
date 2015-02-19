@@ -70,7 +70,7 @@ if not "%HEX%" == "" (
 )
 if not "%EEP%" == "" (
 	echo Reflashing EEP file...
-	"%EXEC%" %TARGET% flash-eeprom "%EEP%"
+	"%EXEC%" %TARGET% flash-eeprom --force "%EEP%"
 )
 if not "%ERRORLEVEL%" == "0" (
 	echo Fail^^!
