@@ -54,6 +54,12 @@
 		"firmware": "ghpad.hex"
 	},
 	{
+		"name": "Staryu",
+		"mcu": "atmega16u2",
+		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
+		"firmware": "staryu.hex"
+	},
+	{
 		"name": "Kimera",
 		"mcu": "atmega32u4",
 		"bootloader": [ "arduino" , "lufa_dfu" ],
