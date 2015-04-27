@@ -3,73 +3,95 @@
 		"name": "GH60 RevA/B/C",
 		"mcu": "atmega32u4",
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
-		"firmware": "gh60-reva_b_c.hex"
+		"firmware": [
+			{ "name": "Default", "file": "gh60-reva_b_c.hex" },
+			{ "name": "No Console", "file": "gh60-reva_b_c-no_console.hex" }
+		]
 	},
 	{
 		"name": "GH60 RevCHN",
 		"mcu": "atmega32u4",
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
-		"firmware": "gh60-revchn.hex"
+		"firmware": [
+			{ "name": "Default", "file": "gh60-revchn.hex" },
+			{ "name": "No Console", "file": "gh60-revchn-no_console.hex" }
+		]
 	},
 	{
 		"name": "GHPad",
 		"mcu": "atmega32u4",
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
-		"firmware": "ghpad.hex"
+		"firmware": [
+			{ "name": "Default", "file": "ghpad.hex" },
+			{ "name": "No Console", "file": "ghpad-no_console.hex" }
+		]
 	},
 	{
 		"name": "Fantastic60",
 		"mcu": "atmega32u4",
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
-		"firmware": "fantastic60.hex"
+		"firmware": [
+			{ "name": "Default", "file": "fantastic60.hex" }
+		]
 	},
 	{
 		"name": "SMART68",
 		"mcu": "atmega32u4",
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
-		"firmware": "smart68.hex"
+		"firmware": [
+			{ "name": "Default", "file": "smart68.hex" }
+		]
 	},
 	{
 		"name": "RedScarfII",
 		"mcu": "atmega32u4",
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
-		"firmware": "redscarfii.hex"
+		"firmware": [
+			{ "name": "Default", "file": "redscarfii.hex" },
+			{ "name": "No Console", "file": "redscarfii-no_console.hex" }
+		]
 	},
 	{
 		"name": "LR94",
 		"mcu": "atmega32u4",
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
-		"firmware": "lr94.hex"
+		"firmware": [
+			{ "name": "Default", "file": "lr94.hex" }
+		]
 	},
 	{
 		"name": "AKB96",
 		"mcu": "atmega32u4",
 		"bootloader": [ "lufa_dfu", "arduino" ],
-		"firmware": "akb96.hex"
+		"firmware": [
+			{ "name": "Default", "file": "akb96.hex" }
+		]
 	},
 	{
 		"name": "TentaPad",
 		"mcu": "atmega32u2",
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
-		"firmware": "ghpad.hex"
+		"firmware": [
+			{ "name": "Default", "file": "tentapad.hex" }
+		]
 	},
 	{
 		"name": "Staryu",
 		"mcu": "atmega16u2",
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
-		"firmware": "staryu.hex"
+		"firmware": [
+			{ "name": "Default", "file": "staryu.hex" },
+			{ "name": "Lite", "file": "staryu-lite.hex" }
+		]
 	},
 	{
 		"name": "Kimera",
 		"mcu": "atmega32u4",
 		"bootloader": [ "arduino" , "lufa_dfu" ],
-		"firmware": "kimera.hex"
-	},
-	{
-		"name": "Two-Headed Kimera",
-		"mcu": "atmega32u4",
-		"bootloader": [ "arduino" , "lufa_dfu" ],
-		"firmware": "kimera-two_headed.hex"
+		"firmware": [
+			{ "name": "Default", "file": "kimera.hex" },
+			{ "name": "Two-Headed", "file": "kimera-two_headed.hex" }
+		]
 	}
 ]
 

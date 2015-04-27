@@ -46,13 +46,13 @@ set /a KBDINDEX="!INPUT! - 1"
 :SHOWKEYBOARDCONFIG
 for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].name"`) do set "KBDNAME=%%a"
 for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].mcu"`) do set "KBDMCU=%%a"
+for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].firmware | map(.file) | join(\"^, \")"`) do set "KBDFW=%%a"
 for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].bootloader | join(\"^, \")"`) do set "KBDBL=%%a"
-for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].firmware"`) do set "KBDFW=%%a"
 echo.
 echo	 Name:		%KBDNAME:"=%
 echo	 MCU:		%KBDMCU:"=%
-echo	 Bootloader:	%KBDBL:"=%
 echo	 Firmware:	%KBDFW:"=%
+echo	 Bootloader:	%KBDBL:"=%
 echo.
 
 :CONFIRMRESELECT
@@ -60,6 +60,29 @@ set "INPUT="
 set /p INPUT="Do you want to reselect? [y/N] "
 if "!INPUT!" == "q" ( goto :EOF )
 if "!INPUT!" == "y" ( goto :SELECTYOURKEYBOARD )
+
+:SELECTFIRMWARE
+echo.
+echo Select a firmware for your keyboard:
+echo.
+for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].firmware | length"`) do set "NUMOFFW=%%a"
+set /a "INDEX=1"
+for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].firmware[].name"`) do (
+	set "NAME=%%a"
+	echo  !INDEX!. !NAME:"=!
+	set /a INDEX="!INDEX! + 1"
+)
+echo.
+:ENTERFIRMWARENUMBER
+set "INPUT=1"
+for /f %%a in ('copy /Z "%~dpf0" nul') do set "ASCII_13=%%a"
+set /p INPUT="Please enter a number: 1!ASCII_13!Please enter a number: "
+if "!INPUT!" == "q" ( goto :EOF )
+set /a INPUT="!INPUT! + 0"
+if !INPUT! leq 0 ( goto :ENTERFIRMWARENUMBER )
+if !INPUT! gtr %NUMOFFW% ( goto :ENTERFIRMWARENUMBER )
+set /a FWINDEX="!INPUT! - 1"
+for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].firmware[%FWINDEX%].file"`) do set "KBDFW=%%a"
 
 :SELECTBOOTLOADER
 echo.
@@ -120,8 +143,8 @@ set CONFFILE=%CONFPATH%\default.ini
 mkdir "%CONFPATH%" 2>NUL
 echo Name=%KBDNAME%> "%CONFFILE%"
 echo MCU=%KBDMCU%>> "%CONFFILE%"
-echo Bootloader=%KBDBL%>> "%CONFFILE%"
 echo Firmware=%KBDFW%>> "%CONFFILE%"
+echo Bootloader=%KBDBL%>> "%CONFFILE%"
 if not "%KBDCOM%" == "" (
 	echo SerialPort="%KBDCOM%">> "%CONFFILE%"
 )
