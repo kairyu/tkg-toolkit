@@ -45,12 +45,10 @@ set /a KBDINDEX="!INPUT! - 1"
 
 :SHOWKEYBOARDCONFIG
 for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].name"`) do set "KBDNAME=%%a"
-for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].mcu"`) do set "KBDMCU=%%a"
-for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].firmware | map(.file) | join(\"^, \")"`) do set "KBDFW=%%a"
+for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].firmware | map(.name) | join(\"^, \")"`) do set "KBDFW=%%a"
 for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].bootloader | join(\"^, \")"`) do set "KBDBL=%%a"
 echo.
 echo	 Name:		%KBDNAME:"=%
-echo	 MCU:		%KBDMCU:"=%
 echo	 Firmware:	%KBDFW:"=%
 echo	 Bootloader:	%KBDBL:"=%
 echo.
@@ -82,6 +80,7 @@ set /a INPUT="!INPUT! + 0"
 if !INPUT! leq 0 ( goto :ENTERFIRMWARENUMBER )
 if !INPUT! gtr %NUMOFFW% ( goto :ENTERFIRMWARENUMBER )
 set /a FWINDEX="!INPUT! - 1"
+for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].firmware[%FWINDEX%].mcu"`) do set "KBDMCU=%%a"
 for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].firmware[%FWINDEX%].file"`) do set "KBDFW=%%a"
 
 :SELECTBOOTLOADER
