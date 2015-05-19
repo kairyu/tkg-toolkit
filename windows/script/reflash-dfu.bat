@@ -64,7 +64,7 @@ if not "%ERRORLEVEL%"=="0" (
 )
 if not "%HEX%" == "" (
 	echo Erasing...
-	"%EXEC%" %TARGET% erase
+	"%EXEC%" %TARGET% erase --force
 	echo Reflashing HEX file...
 	"%EXEC%" %TARGET% flash "%HEX%"
 )
