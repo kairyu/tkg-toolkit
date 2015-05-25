@@ -95,7 +95,7 @@ if "%ERRORLEVEL%" == "0" (
 		set "INPUT="
 		set /p INPUT=Replace existing HEX with the new one? [y/N]
 		if "!INPUT!" == "y" (
-			copy /y %HEX% %HEX_ORIG%
+			copy /y "%HEX%" "%HEX_ORIG%"
 			if not "%ERRORLEVEL%" == "0" (
 				echo Fail^^!
 			)
