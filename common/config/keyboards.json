@@ -4,7 +4,8 @@
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
 		"firmware": [
 			{ "name": "Default", "mcu": "atmega32u4", "file": "gh60-reva_b_c.hex" },
-			{ "name": "No Console", "mcu": "atmega32u4", "file": "gh60-reva_b_c-no_console.hex" }
+			{ "name": "No Console", "mcu": "atmega32u4", "file": "gh60-reva_b_c-no_console.hex" },
+			{ "name": "AVRISP mkII", "mcu": "atmega32u4", "file": "gh60-avrisp_mkii.hex" }
 		]
 	},
 	{
@@ -12,7 +13,9 @@
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
 		"firmware": [
 			{ "name": "Default", "mcu": "atmega32u4", "file": "gh60-revchn.hex" },
-			{ "name": "No Console", "mcu": "atmega32u4", "file": "gh60-revchn-no_console.hex" }
+			{ "name": "No Console", "mcu": "atmega32u4", "file": "gh60-revchn-no_console.hex" },
+			{ "name": "AVRISP mkII", "mcu": "atmega32u4", "file": "gh60-avrisp_mkii.hex" }
+
 		]
 	},
 	{
@@ -20,7 +23,9 @@
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
 		"firmware": [
 			{ "name": "Default", "mcu": "atmega32u4", "file": "ghpad.hex" },
-			{ "name": "No Console", "mcu": "atmega32u4", "file": "ghpad-no_console.hex" }
+			{ "name": "No Console", "mcu": "atmega32u4", "file": "ghpad-no_console.hex" },
+			{ "name": "AVRISP mkII", "mcu": "atmega32u4", "file": "gh60-avrisp_mkii.hex" }
+
 		]
 	},
 	{
