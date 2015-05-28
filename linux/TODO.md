@@ -1,0 +1,26 @@
+TODO
+====
+- [ ] setup
+  - [x] Welcome
+  - [x] Select keyboard
+  - [x] Select firmware
+  - [x] Select bootloader
+  - [ ] Setup arduino bootloader
+  - [x] Save config
+- [x] reflash
+  - [x] Welcome
+  - [x] Load config
+  - [x] Select manipulation
+  - [x] Reflash
+- [ ] util
+- [ ] reflash-dfu
+  - [x] Check dfu-programmer
+  - [x] Wait bootloader
+  - [x] Parse arguments
+  - [x] Reflash
+  - [ ] Replace original hex
+- [ ] reflash-arduino
+- [ ] dump_eeprom-dfu
+- [ ] dump_eeprom-arduino
+- [ ] find_serial_port
+- [ ] wait_serial_port
