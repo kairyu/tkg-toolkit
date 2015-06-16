@@ -57,15 +57,15 @@ goto :USAGE
 
 :REFLASH
 echo Waiting for Bootloader...
-set STARTTIME=%TIME%
+set STARTTIME=%TIME: =0%
 set /a REMIND=0
 set /a STARTTIME=(1%STARTTIME:~0,2%-100)*360000 + (1%STARTTIME:~3,2%-100)*6000 + (1%STARTTIME:~6,2%-100)*100 + (1%STARTTIME:~9,2%-100)
 :WAIT
-set ENDTIME=%TIME%
+set ENDTIME=%TIME: =0%
 set /a ENDTIME=(1%ENDTIME:~0,2%-100)*360000 + (1%ENDTIME:~3,2%-100)*6000 + (1%ENDTIME:~6,2%-100)*100 + (1%ENDTIME:~9,2%-100)
 set /a DURATION=%ENDTIME%-%STARTTIME%
 if %REMIND% LSS 1 (
-	if %DURATION% GTR 2000 (
+	if %DURATION% GTR 3000 (
 		set /a REMIND=1
 		echo Did you forget to press the reset button?
 	)
