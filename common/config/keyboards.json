@@ -81,7 +81,7 @@
 	},
 	{
 		"name": "Kimera",
-		"bootloader": [ "arduino" , "lufa_dfu" ],
+		"bootloader": [ "atmel_dfu", "arduino" , "lufa_dfu" ],
 		"firmware": [
 			{ "name": "Default", "mcu": "atmega32u4", "file": "kimera.hex" },
 			{ "name": "Two-Headed", "mcu": "atmega32u4", "file": "kimera-two_headed.hex" }
