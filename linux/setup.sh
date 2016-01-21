@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ### _   _            _              _ _    _ _
 ###| |_| | ____ _   | |_ ___   ___ | | | _(_) |_
 ###| __| |/ / _` |__| __/ _ \ / _ \| | |/ / | __|
@@ -6,7 +8,6 @@
 ###         |___/
 ###                                         SETUP
 
-#!/bin/bash
 CURPATH=$(dirname "$0")
 CONFPATH=$CURPATH/conf
 BINPATH=$CURPATH/bin
