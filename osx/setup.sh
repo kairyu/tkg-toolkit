@@ -129,7 +129,7 @@ KBDBL=$(jq ".[$KBDINDEX].bootloader[$BLINDEX]")
 
 CONFFILE=$CONFPATH/default.ini
 mkdir -p "$CONFPATH" 2>/dev/null
-echo "Name=$KBDNAME" > "$CONFFILE"
+echo "Name=\"$KBDNAME\"" > "$CONFFILE"
 echo "MCU=$KBDMCU" >> "$CONFFILE"
 echo "Firmware=$KBDFW" >> "$CONFFILE"
 echo "Bootloader=$KBDBL" >> "$CONFFILE"
