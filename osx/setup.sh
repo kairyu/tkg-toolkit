@@ -16,6 +16,10 @@ KBDFILE=$CURPATH/../common/config/keyboards.json
 JQ=$BINPATH/jq
 
 function jq {
+	if [[ ! -x "$JQ" ]]
+	then
+		JQ=$(which jq)
+	fi
 	cat "$KBDFILE" | "$JQ" "$1"# | sed "s/\"//g"
 }
 
