@@ -96,6 +96,13 @@
 			{ "name": "Two-Headed", "mcu": "atmega32u4", "file": "kimera-core-two_headed.hex" },
 			{ "name": "Two-Headed No-Console", "mcu": "atmega32u4", "file": "kimera-core-two_headed-no_console.hex" }
 		]
+	},
+	{
+		"name": "USB2USB",
+		"bootloader": [ "atmel_dfu", "lufa_dfu" ],
+		"firmware": [
+			{ "name": "Default", "mcu": "atmega32u4", "file": "usb2usb.hex" }
+		]
 	}
 
 ]
