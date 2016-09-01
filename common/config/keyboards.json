@@ -51,6 +51,14 @@
 		]
 	},
 	{
+		"name": "RedScarfII+",
+		"bootloader": [ "hid" , "lufa_dfu" ],
+		"firmware": [
+			{ "name": "Default", "mcu": "atmega32u4", "file": "redscarfii+.hex" },
+			{ "name": "No-Console", "mcu": "atmega32u4", "file": "redscarfii+-no_console.hex" }
+		]
+	},
+	{
 		"name": "LR94",
 		"bootloader": [ "atmel_dfu" , "lufa_dfu" ],
 		"firmware": [

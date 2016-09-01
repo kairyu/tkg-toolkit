@@ -134,6 +134,9 @@ if "%KBDBL%" == "atmel_dfu" (
 	set PARTNO=%KBDMCU%
 	set COM=%KBDCOM%
 	call "%SCRIPTPATH%\reflash-arduino" "%ARG1%"
+) else if "%KBDBL%" == "hid" (
+	set MMCU=%KBDMCU%
+	call "%SCRIPTPATH%\reflash-hid" "%ARG1%"
 ) else (
 	echo Unsupported bootloader
 	echo.
