@@ -111,7 +111,22 @@
 		"firmware": [
 			{ "name": "Default", "mcu": "atmega32u4", "file": "usb2usb.hex" }
 		]
+	},
+	{
+		"name": "ErgoDone",
+		"bootloader": [ "hid", "lufa_dfu" , "arduino" ],
+		"firmware": [
+			{ "name": "Default", "mcu": "atmega32u4", "file": "ergodone.hex" },
+			{ "name": "Prototype", "mcu": "atmega32u4", "file": "ergodone-prototype.hex" }
+		]
+	},
+	{
+		"name": "CW40",
+		"bootloader": [ "hid", "lufa_dfu" ],
+		"firmware": [
+			{ "name": "Default", "mcu": "atmega32u4", "file": "cw40.hex" },
+			{ "name": "Prototype", "mcu": "atmega32u4", "file": "cw40-prototype.hex" }
+		]
 	}
-
 ]
 
