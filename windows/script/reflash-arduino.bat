@@ -28,7 +28,7 @@ if not "%ARG2%" == "" set /a ARGS=2
 
 if "%ARGS%" == "1" (
 	if not exist "%ARG1%" goto :USAGE
-	for %%i in (%ARG1%) do set ARG1_EXT=%%~xi
+	for %%i in ("%ARG1%") do set ARG1_EXT=%%~xi
 	if "!ARG1_EXT!" == ".hex" (
 		set "HEX=%ARG1%"
 		goto :REFLASH
@@ -41,7 +41,7 @@ if "%ARGS%" == "1" (
 )
 if "%ARGS%" == "2" (
 	if not exist "%ARG2%" goto :USAGE
-	for %%i in (%ARG2%) do set ARG2_EXT=%%~xi
+	for %%i in ("%ARG2%") do set ARG2_EXT=%%~xi
 	if "!ARG2_EXT!" == ".hex" (
 		set "HEX=%ARG2%"
 		set "HEX_ORIG=%ARG1%"

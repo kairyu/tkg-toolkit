@@ -41,7 +41,7 @@ function load_config_file {
 	check_config_file "$1"
 	while read line
 	do
-		declare -g "$line"
+		eval "$line"
 	done < "$1"
 }
 
@@ -65,7 +65,7 @@ function select_manipulation {
 	echo ""
 	ARG="$@"
 	if [ -z "$ARG" ]
-	then 
+	then
 		EXITCODE=1
 		echo " Reflash default firmware: ../common/firmware/$KBDFW"
 	elif [ -f "$ARG" ]
@@ -73,14 +73,14 @@ function select_manipulation {
 		ARG_NAME=$(basename "$ARG")
 		ARG_EXT=${ARG_NAME##*.}
 		if [ "$ARG_EXT" == "hex" ]
-		then 
+		then
 			EXITCODE=2
 			echo " Reflash firmware: \"$ARG\""
 		elif [ "$ARG_EXT" == "eep" ]
-		then 
+		then
 			EXITCODE=3
 			echo " Reflash eeprom: \"$ARG\""
-		else	
+		else
 			echo " Wrong argument: \"$ARG\""
 			end
 		fi
@@ -100,9 +100,9 @@ function reflash {
 		"atmel_dfu")
 			TARGET=$KBDMCU
 			if [ -z "$ARG2" ]
-			then 
+			then
 				"$SCRIPTPATH/reflash-dfu.sh" "$ARG1"
-			else	
+			else
 				"$SCRIPTPATH/reflash-dfu.sh" "$ARG1" "$ARG2"
 			fi
 			;;
@@ -130,9 +130,9 @@ KBDMCU=$MCU
 KBDBL=$Bootloader
 KBDFW=$Firmware
 if [ -n "$SerialPort" ]
-then 
+then
 	KBDCOM=$SerialPort
-else	
+else
 	KBDCOM=
 fi
 
@@ -153,12 +153,12 @@ case $MANIP in
 		;;
 	3)
 		if [ "$KBDBL" == "atmel_dfu" ]
-		then 
+		then
 			ARG1="$FWPATH/$KBDFW"
 			ARG2="$ARG"
-		else	
+		else
 			ARG1="$ARG"
-		fi	
+		fi
 		;;
 	*)
 		exit

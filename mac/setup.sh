@@ -53,7 +53,7 @@ function select_from_list {
 	do
 		printf "Please enter a number: "
 		if [ -n "$DEFAULT" ]
-		then 
+		then
 			INPUT=$DEFAULT
 			printf "$DEFAULT"
 			for b in {1..${#DEFAULT}}
@@ -67,7 +67,7 @@ function select_from_list {
 		[ "$INPUT" == "" ] && INPUT=$DEFAULT
 		INPUT=$(($INPUT))
 		if [ $INPUT -ge 1 -a $INPUT -le $COUNT ]
-		then 
+		then
 			return $INPUT
 		fi
 	done
@@ -87,7 +87,7 @@ function print_keyboard_info {
 	INDEX=$1
 	KBDNAME=$(jq ".[$INDEX].name")
 	KBDFW=$(jq ".[$INDEX].firmware | map(.name) | join(\", \")")
-	KBDBL=$(jq ".[$INDEX].bootloader | join(\", \")")
+	KBDBL=$(jq ".[$INDEX].bootloader | map(.name) | join(\", \")")
 	echo " Name:       $KBDNAME"
 	echo " Firmware:   $KBDFW"
 	echo " Bootloader: $KBDBL"
@@ -106,7 +106,7 @@ function select_bootloader {
 	echo ""
 	echo "Select bootloader of your keyboard:"
 	echo ""
-	IFS=$'\n'; select_from_list 1 $(jq ".[$1].bootloader[]")
+	IFS=$'\n'; select_from_list 1 $(jq ".[$1].bootloader[].name")
 	return $?
 }
 
@@ -117,9 +117,9 @@ do
 	KBDINDEX=$(($?-1))
 
 	print_keyboard_info $KBDINDEX
-	read -p "Do you want to reselect? [y/N] " INPUT
+	read -p "Do you want to continue? [Y/n] " INPUT
 	[ "$INPUT" == "q" ] && exit
-	[ "$INPUT" != "y" ] && break
+	[ "$INPUT" != "n" ] && break
 done
 
 select_firmware $KBDINDEX
@@ -129,7 +129,7 @@ KBDFW=$(jq ".[$KBDINDEX].firmware[$FWINDEX].file")
 
 select_bootloader $KBDINDEX
 BLINDEX=$(($?-1))
-KBDBL=$(jq ".[$KBDINDEX].bootloader[$BLINDEX]")
+KBDBL=$(jq ".[$KBDINDEX].bootloader[$BLINDEX].name")
 
 CONFFILE=$CONFPATH/default.ini
 mkdir -p "$CONFPATH" 2>/dev/null

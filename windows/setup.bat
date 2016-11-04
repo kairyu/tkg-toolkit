@@ -15,6 +15,8 @@ set SCRIPTPATH=%CURPATH%\script
 set KBDFILE=%CURPATH%\..\common\config\keyboards.json
 set KBD=type "%KBDFILE%"
 set JQ="%BINPATH%\jq"
+set RUNASADMIN="%BINPATH%\run_as_admin.lnk"
+set INSDRV="%SCRIPTPATH%\install_driver"
 
 :WELCOME
 cls
@@ -46,7 +48,7 @@ set /a KBDINDEX="!INPUT! - 1"
 :SHOWKEYBOARDCONFIG
 for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].name"`) do set "KBDNAME=%%a"
 for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].firmware | map(.name) | join(\"^, \")"`) do set "KBDFW=%%a"
-for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].bootloader | join(\"^, \")"`) do set "KBDBL=%%a"
+for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].bootloader | map(.name) | join(\"^, \")"`) do set "KBDBL=%%a"
 echo.
 echo	 Name:		%KBDNAME:"=%
 echo	 Firmware:	%KBDFW:"=%
@@ -55,9 +57,9 @@ echo.
 
 :CONFIRMRESELECT
 set "INPUT="
-set /p INPUT="Do you want to reselect? [y/N] "
+set /p INPUT="Do you want to continue? [Y/n] "
 if "!INPUT!" == "q" ( goto :EOF )
-if "!INPUT!" == "y" ( goto :SELECTYOURKEYBOARD )
+if "!INPUT!" == "n" ( goto :SELECTYOURKEYBOARD )
 
 :SELECTFIRMWARE
 echo.
@@ -89,7 +91,7 @@ echo Select bootloader of your keyboard:
 echo.
 for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].bootloader | length"`) do set "NUMOFBL=%%a"
 set /a "INDEX=1"
-for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].bootloader[]"`) do (
+for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].bootloader[].name"`) do (
 	set "NAME=%%a"
 	echo  !INDEX!. !NAME:"=!
 	set /a INDEX="!INDEX! + 1"
@@ -104,7 +106,24 @@ set /a INPUT="!INPUT! + 0"
 if !INPUT! leq 0 ( goto :ENTERBOOTLOADERNUMBER )
 if !INPUT! gtr %NUMOFBL% ( goto :ENTERBOOTLOADERNUMBER )
 set /a BLINDEX="!INPUT! - 1"
-for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].bootloader[%BLINDEX%]"`) do set "KBDBL=%%a"
+for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].bootloader[%BLINDEX%].name"`) do set "KBDBL=%%a"
+
+:DFUBOOTLOADER
+set "DFUBL=0"
+if %KBDBL% == "atmel_dfu" ( set "DFUBL=1" )
+if %KBDBL% == "lufa_dfu" ( set "DFUBL=1" )
+if "!DFUBL!" == "1" (
+	for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].bootloader[%BLINDEX%].vid"`) do set "BLVID=%%a"
+	for /f "usebackq delims=" %%a in (`%KBD% ^| %JQ% ".[%KBDINDEX%].bootloader[%BLINDEX%].pid"`) do set "BLPID=%%a"
+	set BLVID=!BLVID:"=!
+	set BLPID=!BLPID:"=!
+	echo.
+
+	set /p INPUT="Do you want to install driver for bootloader? [y/N] "
+	if "!INPUT!" == "q" ( goto :EOF )
+	if "!INPUT!" == "y" ( goto :INSTALLDRIVER )
+	goto :SAVECONFIG
+)
 
 :ARDUINOBOOTLOADER
 set "KBDCOM="
@@ -116,6 +135,12 @@ if %KBDBL% == "arduino" (
 	if "!INPUT!" == "n" ( goto :ENTERSERIALPORT )
 	goto :FINDSERIALPORT
 )
+
+goto :SAVECONFIG
+
+:INSTALLDRIVER
+echo.
+%RUNASADMIN% %INSDRV% %BLVID% %BLPID%
 goto :SAVECONFIG
 
 :ENTERSERIALPORT
