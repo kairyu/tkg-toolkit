@@ -22,12 +22,26 @@ if %REMIND% LSS 1 (
 	)
 )
 zadic --dryrun --usealldevice --noprompt --vid %1 --pid %2 >nul 2>nul
-if not "%ERRORLEVEL%"=="0" (
-	goto :WAIT
+if "%ERRORLEVEL%"=="0" (
+	goto :INSTALL
 )
-echo Found bootloader, start to install driver
+if "%ERRORLEVEL%"=="2" (
+	goto :NONEEDTOINSTALL
+)
+goto :WAIT
+
+:INSTALL
+echo Found bootloader, start to install driver. (this might take a few minutes)
 zadic --usealldevice --noprompt --vid %1 --pid %2 >nul 2>nul
-echo Installation completed
+echo Installation completed.
+goto :END
+
+:NONEEDTOINSTALL
+echo Found bootloader, however driver is already installed.
+echo Installation completed. (nothing to install)
+goto :END
+
+:END
 endlocal
 pause
 exit
