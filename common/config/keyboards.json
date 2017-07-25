@@ -187,6 +187,17 @@
 			{ "name": "Default", "mcu": "atmega32u4", "file": "cw40.hex" },
 			{ "name": "Prototype", "mcu": "atmega32u4", "file": "cw40-prototype.hex" }
 		]
+	},
+	{
+		"name": "XD75",
+		"bootloader": [
+			{ "name": "atmel_dfu", "vid": "0x03EB", "pid": "0x2FF4" },
+			{ "name": "lufa_dfu", "vid": "0x03EB", "pid": "0x2FF4" }
+		],
+		"firmware": [
+			{ "name": "Default", "mcu": "atmega32u4", "file": "xd75.hex" },
+			{ "name": "No-Console", "mcu": "atmega32u4", "file": "xd75-no_console.hex" }
+		]
 	}
 ]
 
