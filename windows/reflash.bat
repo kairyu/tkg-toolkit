@@ -137,6 +137,9 @@ if "%KBDBL%" == "atmel_dfu" (
 ) else if "%KBDBL%" == "hid" (
 	set MMCU=%KBDMCU%
 	call "%SCRIPTPATH%\reflash-hid" "%ARG1%"
+) else if "%KBDBL%" == "hid_v1" (
+	set MMCU=%KBDMCU%
+	call "%SCRIPTPATH%\reflash-hid-v1" "%ARG1%"
 ) else (
 	echo Unsupported bootloader
 	echo.
