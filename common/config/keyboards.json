@@ -112,8 +112,8 @@
 	{
 		"name": "Staryu",
 		"bootloader": [
-			{ "name": "atmel_dfu", "vid": "0x03EB", "pid": "0x2FF4" },
-			{ "name": "lufa_dfu", "vid": "0x03EB", "pid": "0x2FF4" }
+			{ "name": "atmel_dfu", "vid": "0x03EB", "pid": "0x2FF0" },
+			{ "name": "lufa_dfu", "vid": "0x03EB", "pid": "0x2FF0" }
 		],
 		"firmware": [
 			{ "name": "Default", "mcu": "atmega32u2", "file": "staryu.hex" }
@@ -197,6 +197,18 @@
 		"firmware": [
 			{ "name": "Default", "mcu": "atmega32u4", "file": "xd75.hex" },
 			{ "name": "No-Console", "mcu": "atmega32u4", "file": "xd75-no_console.hex" }
+		]
+	},
+	{
+		"name": "Daisy",
+		"bootloader": [
+			{ "name": "hid_v1", "vid": "0x1209", "pid": "0x2327" },
+			{ "name": "atmel_dfu", "vid": "0x03EB", "pid": "0x2FF4" },
+			{ "name": "lufa_dfu", "vid": "0x03EB", "pid": "0x2FF4" }
+		],
+		"firmware": [
+			{ "name": "Default", "mcu": "atmega32u4", "file": "daisy.hex" },
+			{ "name": "No-Console", "mcu": "atmega32u4", "file": "daisy-no_console.hex" }
 		]
 	}
 ]
