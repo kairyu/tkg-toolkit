@@ -24,7 +24,7 @@ TARGET_REG="(^atmega[0-9]{2}u[0-9]$)|(^at90usb[0-9]{4}$)"
 
 echo "Reflashing $EXT file..."
 "$EXEC" -w -v -mmcu=$TARGET "$ARG1"
-$EXITCODE=$?
+EXITCODE=$?
 if [ $EXITCODE -eq 0 ]
 then
     echo "Success!"
