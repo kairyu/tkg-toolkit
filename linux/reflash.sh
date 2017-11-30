@@ -115,6 +115,10 @@ function reflash {
 			COM=$KBDCOM
 			"$SCRIPTPATH/reflash-arduino.sh" "$ARG1"
 			;;
+        "hid")
+            TARGET=$KBDMCU
+            "$SCRIPTPATH/reflash-hid.sh" "$ARG1"
+            ;;
 		*)
 			echo "Unsupported bootloader"
 			end
