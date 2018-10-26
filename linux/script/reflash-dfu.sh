@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 SCRIPT=$(basename "$0")
 CURPATH=$(dirname "$0")
 BINPATH=$CURPATH/../bin
